@@ -25,12 +25,17 @@ app.use('/src/js', express.static('js'));//
 app.use('/src/js', express.static('css'));//
 
 
+
 app.get('/login', function(req, res) {
     res.sendFile(__dirname + '/log.html');
   });
   
   app.get('/register', function(req, res) {
     res.sendFile(__dirname + '/reg.html');
+  });
+
+  app.get('/quizz', function(req, res) {
+    res.sendFile(__dirname + '/quiz.html');
   });
 
   app.post('/login', function(req, res) {

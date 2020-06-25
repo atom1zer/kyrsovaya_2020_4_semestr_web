@@ -13,7 +13,7 @@ var login = new Vue({
 			}).then(res =>{
 				console.log(res)
 				localStorage.setItem('token', res.data.data.token)
-				location.href = "/";
+				location.href = "/quizz";
 			}).catch(err =>{
 				console.log(err)
 			});
@@ -37,10 +37,30 @@ var login = new Vue({
 			}).then(res =>{
 				console.log(res.data)
 				alert("Вы успешно зарегистрированы");
-				location.href = "/register";
+				location.href = "/login";
 			}).catch(err=>{
 				console.log(email+login + password)
 
+			});
+		}
+	}
+})
+
+var quiz = new Vue({
+	el:'#quiz',
+	data:{
+		quizzes: []
+	},
+	methods:{
+		list_of_quiz: function(){
+			axios.get('/quiz',{
+		
+			}).then(res =>{
+				this.quizzes = res.data.quiz;
+				this.quizzes = value;
+				console.log(res.data.quiz)
+				//alert("Вы успешно зарегистрированы");
+			}).catch(err=>{
 			});
 		}
 	}
