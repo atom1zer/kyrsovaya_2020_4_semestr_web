@@ -96,12 +96,10 @@ if (error) {
   
 throw error
 }
-/*let quiz = (results.rows)
-res.send({status:true, quiz:quiz})*/
 
-let quiz = (results.rows)//переделал форму
+let quiz = (results.rows)
   res.send({
-  status: true, //добавил статус для авторизации(успешной)
+  status: true,
   quiz:quiz
   }
   
@@ -143,12 +141,24 @@ res.send({status: a[0]+" "})
 })
 }
 const createResult = (req, res) => {
-const {userID, quizID, correctCount, correct} = req.body//Доделать БАН!!!
-/*
- pool.query("SELECT user_id = $1 FROM results WHERE quiz_id = $2", [userID, quizID], (error, results) => {});*/
- /*
-else {*/
-  console.log("Есть ЗАПИСИ!!!!!!!!!");
+const {userID, quizID, correctCount, correct} = req.body
+
+ pool.query("SELECT user_id = $1 FROM results WHERE quiz_id = $2", [userID, quizID], (error, results) => {//Ban
+ if(error){
+   res.status(500).send({
+     error: 'Server error'
+   })
+ }
+ if(results.rows[0]){
+  console.log("ЕСТЬ ЗАПИСЬ!!!!!!!!!");
+  res.send({
+    BAN: false
+    // status: false
+  })
+
+ }
+ else{
+  console.log("НЕТ ЗАПИСИ!!!!!!!!!");
   pool.query('INSERT INTO results (user_id, quiz_id, correctCount, correct) VALUES ($1, $2, $3, $4)', [userID, quizID, correctCount, correct], (error, results) => {
     if(error) {
     res.status(400).send({
@@ -181,15 +191,12 @@ else {*/
               error: error
               })
               }
-            /*win.then((response)=> {
-              var g = response.rows[0].statistics;
-              var g = g+1;
-            })*/
+            
           }
           else{
             
             console.log(b);
-        res.send({status: false, f: m+" Неправильный ответ!!!"})
+        res.send({BAN: true, f: m+" Неправильный ответ!!!"})
           }
         
      });     
@@ -197,9 +204,10 @@ else {*/
   
       }
     })
+  }
   //}
-  /*}
-});*/
+  /*}*/
+});
   }
   const getUserById = (req, res) => {
   const id = parseInt(req.params.id)
@@ -371,8 +379,11 @@ else {*/
               }
 
               let stat = (results.rows)
+              console.log(stat)
               res.send({
+                
                 stat:stat
+                
                 }
                 
                 )

@@ -100,3 +100,22 @@ var exit = new Vue({
 	}
 })
 
+var stat = new Vue({
+	el:'#stat',
+	data:{
+		results: []
+	},
+	methods:{
+		list_of_stat: function(){
+			axios.get('/statistics',{	
+			}).then(res =>{
+				this.results = res.data.stat;
+				this.results = value;
+				console.log(res.data.stat)
+				//alert("Вы успешно зарегистрированы");
+			}).catch(err=>{
+			});
+		}
+	}
+})
+

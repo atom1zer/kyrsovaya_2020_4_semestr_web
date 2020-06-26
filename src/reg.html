@@ -9,16 +9,15 @@
   <style type="text/css">
     #wrapper{
 border: solid black 1px;
-border-radius: 18px;
+border-radius: 30px;
 width: 500px;
-height: 250px;
+height: 310px;
               
 top: 50%;                         
-transform: translate(0, 100%);
+transform: translate(0, 80%);
 margin: 0 auto;
 margin-left: auto;
 margin-right: auto;
-
 
 }
 #body{
@@ -47,42 +46,14 @@ padding: 20px;
           <input  type="text" v-model="email" placeholder="Логин" class="text-center"> <br> <br>    
           <input  type="password" v-model="password"  placeholder="Пароль" class="text-center"> <br> <br>
           <button type="button"  value="Войти" @click="login()" class="btn btn-dark">Вход</button> 
-          <i> or <a href="/register" data-toggle="modal" data-target="#reg">SignUp</a></i>
+          <i> or <a href="/register" data-toggle="modal" data-target="#reg">SignUp</a></i> <br> <br> 
+          <input type="button" value="Статистика" class="btn btn-dark" onclick="location.href='/statistic'"/>
+
+          <!-- <button type="button"  data-toggle="modal" value="Статистика" @click="location.href='stat.html'" class="btn btn-dark">Статистика</button>  -->
         </form>          
       </div>
     </div>
-
-    
-    <div id="main">
-      <div>
-       
-        <!-- <form method="POST" id="reg" class="forms_form" >
-
-           <label for="email">Email</label> <br>
-          <input type="email" v-model="email" placeholder="Введите email"> <br> <br>
-
-           <label for="login">Логин</label> <br>
-          <input type="login" v-model="login" placeholder="Введите логин"> <br> <br>
-
-          <label for="password">Password</label> <br>
-          <input type="password" v-model="password" placeholder="Введите пароль"> <br> <br>
-
-
-          <input type="button" @click="register()" value="ВОЙТИ">
-
-        </form> -->
-        
-      </div>
-    </div>
-
-    <div id="footer">
-
-    </div>
-
   </div>
-
-  
-
 
 
 <!-- Modal -->

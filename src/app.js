@@ -26,7 +26,7 @@ app.use('/src/js', express.static('css'));//
 
 
 
-app.get('/login', function(req, res) {
+app.get('/login', function(req, res) { 
     res.sendFile(__dirname + '/log.html');
   });
   
@@ -36,6 +36,10 @@ app.get('/login', function(req, res) {
 
   app.get('/quizz', function(req, res) {
     res.sendFile(__dirname + '/quiz.html');
+  });
+
+  app.get('/statistic', function(req, res) {
+    res.sendFile(__dirname + '/stat.html');
   });
 
   app.post('/login', function(req, res) {
