@@ -7,17 +7,24 @@ var login = new Vue({
 	},
 	methods:{
 		login: function(){
+			if(localStorage.getItem("token") == "1"){
+				location.href = "/quizz";
+			}
+			else{
 			axios.post('/login',{
 				email: this.email,
 				password: this.password
 			}).then(res =>{
 				console.log(res)
-				localStorage.setItem('token', res.data.data.token)
-				location.href = "/quizz";
+				//localStorage.setItem('token', res.data.data.token)	
+				localStorage.setItem('token', "1")		
+				location.href = "/quizz"
 			}).catch(err =>{
 				console.log(err)
 			});
 		}
+		}
+		
 	}
 })
  var reg = new Vue({
@@ -37,7 +44,7 @@ var login = new Vue({
 			}).then(res =>{
 				console.log(res.data)
 				alert("Вы успешно зарегистрированы");
-				location.href = "/login";
+				location.href = "/register";
 			}).catch(err=>{
 				console.log(email+login + password)
 
@@ -45,6 +52,8 @@ var login = new Vue({
 		}
 	}
 })
+
+
 
 var quiz = new Vue({
 	el:'#quiz',
@@ -65,26 +74,29 @@ var quiz = new Vue({
 		}
 	}
 })
-// var exit = new Vue({
-// 	el:'#exit',
-// 	data:{
 
-// 	},
-// 	methods:{
-// 		exit: function(){
-// 			axios.get('https://sign10.herokuapp.com/logout',{
-// 				params:{
-// 					token: localStorage.getItem('token')
-// 				}
-// 			}).then(res =>{
-// 				console.log(res.data)
-// 				location.href = "index.php";
 
-// 			}).catch(err=>{
-// 				console.log(err)
+var exit = new Vue({
+	el:'#exit',
+	data:{},
+	methods:{
+		quit: function(){
+			axios.get('/',{
+				params:{
+					token: localStorage.getItem('token')
+				}
+			}).then(res =>{
+				localStorage.removeItem(this.email)
+				localStorage.removeItem('token')
+				console.log(res.data)
+				location.href = "/register";
 
-// 			});
+			}).catch(err=>{
+				console.log(err)
 
-// 		}
-// 	}
-// })
+			});
+
+		}
+	}
+})
+

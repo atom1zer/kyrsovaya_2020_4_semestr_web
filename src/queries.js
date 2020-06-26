@@ -27,6 +27,7 @@ password varchar COLLATE pg_catalog."default" NOT NULL,
 login text COLLATE pg_catalog."default",
 "IsAdmin" boolean,
 statistics integer DEFAULT 0 ,
+cookie text,
 CONSTRAINT users_pkey PRIMARY KEY (id),
 CONSTRAINT constraintname UNIQUE (login)
 ,
@@ -142,18 +143,10 @@ res.send({status: a[0]+" "})
 })
 }
 const createResult = (req, res) => {
-const {userID, quizID, correctCount, correct} = req.body
-/*var n = [];
- n = n + pool.query("SELECT user_id = $1 FROM results WHERE quiz_id = $2", [userID, quizID]);*/
- /*n.then((response) => {
-  var z = response.rows[0].results;
-  console.log("!!!!!!!!!" + z );*/
-  /*console.log("!!!!!!!!!" + n.length);
-        if (n.length>0){
-          console.log("ДЛИНА БОЛЬШЕ 0!!!!!!!!!");
-          
-        //res.send({status: false })
-}
+const {userID, quizID, correctCount, correct} = req.body//Доделать БАН!!!
+/*
+ pool.query("SELECT user_id = $1 FROM results WHERE quiz_id = $2", [userID, quizID], (error, results) => {});*/
+ /*
 else {*/
   console.log("Есть ЗАПИСИ!!!!!!!!!");
   pool.query('INSERT INTO results (user_id, quiz_id, correctCount, correct) VALUES ($1, $2, $3, $4)', [userID, quizID, correctCount, correct], (error, results) => {
@@ -244,7 +237,7 @@ else {*/
   })
   }
   if (!results.rows[0]) {
-  return res.send({
+  return res.status(400).send({
   status: false, //добавил статус авторизации(неуспешной)
   error: 'Incorrect input'
   })
