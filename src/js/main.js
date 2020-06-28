@@ -63,8 +63,8 @@ var quiz = new Vue({
 	methods:{
 		list_of_quiz: function(){
 			axios.get('/quiz',{
-		
-			}).then(res =>{
+			}).then(res =>{	
+				console.log(res.data.quiz)
 				this.quizzes = res.data.quiz;
 				this.quizzes = value;
 				console.log(res.data.quiz)

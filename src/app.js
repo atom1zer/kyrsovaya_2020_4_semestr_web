@@ -24,8 +24,6 @@ app.listen(port, () => {
 app.use('/src/js', express.static('js'));//
 app.use('/src/js', express.static('css'));//
 
-
-
 app.get('/login', function(req, res) { 
     res.sendFile(__dirname + '/log.html');
   });

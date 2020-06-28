@@ -27,7 +27,6 @@ password varchar COLLATE pg_catalog."default" NOT NULL,
 login text COLLATE pg_catalog."default",
 "IsAdmin" boolean,
 statistics integer DEFAULT 0 ,
-cookie text,
 CONSTRAINT users_pkey PRIMARY KEY (id),
 CONSTRAINT constraintname UNIQUE (login)
 ,
